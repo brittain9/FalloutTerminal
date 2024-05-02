@@ -22,3 +22,4 @@ C:\Users\alex\source\repos\FalloutTerminal\FalloutTerminal\obj\Debug\net8.0\refi
 C:\Users\alex\source\repos\FalloutTerminal\FalloutTerminal\obj\Debug\net8.0\FalloutTerminal.pdb
 C:\Users\alex\source\repos\FalloutTerminal\FalloutTerminal\obj\Debug\net8.0\FalloutTerminal.genruntimeconfig.cache
 C:\Users\alex\source\repos\FalloutTerminal\FalloutTerminal\obj\Debug\net8.0\ref\FalloutTerminal.dll
+C:\Users\alex\source\repos\FalloutTerminal\FalloutTerminal\obj\Debug\net8.0\FalloutTerminal.sourcelink.json
