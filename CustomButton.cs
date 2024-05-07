@@ -10,23 +10,29 @@ namespace fot
 
     public class CustomButton : View
     {
-        public CustomButton() : this(text: string.Empty, is_default: false) { }
-
-        public CustomButton(ustring text, bool is_default = false) : base(text)
+        public string CodeWord { get; set; } // each button will be associated with the CodeWord for comparison
+        public CustomButton(string text) : base(text)
         {
-            Initialize(text, is_default);
+            Initialize(text);
         }
 
-        public CustomButton(int x, int y, ustring text) : this(x, y, text, false) { }
-
-        public CustomButton(int x, int y, ustring text, bool is_default)
-            : base(new Rect(x, y, text.RuneCount + 4 + (is_default ? 2 : 0), 1), text)
+        public CustomButton(int x, int y, string text) : base(new Rect(x, y, text.Length, 1), text)
         {
-            Initialize(text, is_default);
+            Initialize(text);
         }
 
-        void Initialize(ustring text, bool is_default)
+        void Initialize(ustring text)
         {
+            CodeWord = text.ToString();
+
+            ColorScheme = new ColorScheme
+            {
+                Normal = new Terminal.Gui.Attribute(Color.White, Color.Black),
+                Focus = new Terminal.Gui.Attribute(Color.Black, Color.Green),
+                HotNormal = new Terminal.Gui.Attribute(Color.White, Color.Black),
+                HotFocus = new Terminal.Gui.Attribute(Color.Black, Color.Green)
+            };
+
             TextAlignment = TextAlignment.Centered;
             VerticalTextAlignment = VerticalTextAlignment.Middle;
 
@@ -55,7 +61,6 @@ namespace fot
             TextFormatter.Text =  Text;
         }
 
-        ///<inheritdoc/>
         public override bool ProcessHotKey(KeyEvent kb)
         {
             if (!Enabled)
@@ -66,7 +71,6 @@ namespace fot
             return ExecuteHotKey(kb);
         }
 
-        ///<inheritdoc/>
         public override bool ProcessColdKey(KeyEvent kb)
         {
             if (!Enabled)
@@ -77,7 +81,6 @@ namespace fot
             return ExecuteColdKey(kb);
         }
 
-        ///<inheritdoc/>
         public override bool ProcessKey(KeyEvent kb)
         {
             if (!Enabled)
@@ -121,26 +124,13 @@ namespace fot
             return true;
         }
 
-        /// <summary>
-        /// Virtual method to invoke the <see cref="Clicked"/> event.
-        /// </summary>
         public virtual void OnClicked()
         {
             Clicked?.Invoke();
         }
 
-        /// <summary>
-        ///   Clicked <see cref="Action"/>, raised when the user clicks the primary mouse CustomButton within the Bounds of this <see cref="View"/>
-        ///   or if the user presses the action key while this view is focused. (TODO: IsDefault)
-        /// </summary>
-        /// <remarks>
-        ///   Client code can hook up to this event, it is
-        ///   raised when the CustomButton is activated either with
-        ///   the mouse or the keyboard.
-        /// </remarks>
         public event Action Clicked;
 
-        ///<inheritdoc/>
         public override bool MouseEvent(MouseEvent me)
         {
             if (me.Flags == MouseFlags.Button1Clicked)
@@ -161,7 +151,6 @@ namespace fot
             return false;
         }
 
-        ///<inheritdoc/>
         public override void PositionCursor()
         {
             if (HotKey == Key.Unknown && Text != "")
@@ -178,7 +167,6 @@ namespace fot
             base.PositionCursor();
         }
 
-        ///<inheritdoc/>
         public override bool OnEnter(View view)
         {
             Application.Driver.SetCursorVisibility(CursorVisibility.Invisible);
