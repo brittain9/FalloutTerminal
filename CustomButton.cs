@@ -27,7 +27,7 @@ namespace fot
 
             ColorScheme = new ColorScheme
             {
-                Normal = new Terminal.Gui.Attribute(Color.White, Color.Black),
+                Normal = new Terminal.Gui.Attribute(Color.Green, Color.Black),
                 Focus = new Terminal.Gui.Attribute(Color.Black, Color.Green),
                 HotNormal = new Terminal.Gui.Attribute(Color.White, Color.Black),
                 HotFocus = new Terminal.Gui.Attribute(Color.Black, Color.Green)
@@ -126,10 +126,10 @@ namespace fot
 
         public virtual void OnClicked()
         {
-            Clicked?.Invoke();
+            Clicked?.Invoke(this);
         }
 
-        public event Action Clicked;
+        public event Action<object> Clicked;
 
         public override bool MouseEvent(MouseEvent me)
         {

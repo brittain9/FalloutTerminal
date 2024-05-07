@@ -6,9 +6,12 @@ namespace fot
 {
     public class FalloutTerminal : Window
     {
+        // TODO: Handle resizing
         public static Label Title { get; set; }
         public static Label EnterPassword { get; set; }
         public static FrameView HexFrame { get; set; } // this frame is where the buttons are
+        private HexFrameLogic hLogic;
+
         public static FrameView ConsoleFrame { get; set; } // this frame is for the messages
         public static int RemainingAttempts { get; set; } = 4;
 
@@ -51,14 +54,8 @@ namespace fot
                 Height = Dim.Fill(),
                 ColorScheme = ColorScheme
             };
-
-            var btton = new CustomButton(1, 2, "List");
-            btton.Clicked += HexFrameLogic.OnTextButtonClicked;
-
-            var btton1 = new CustomButton(0, 1, "Duck");
-            btton1.Clicked += HexFrameLogic.OnTextButtonClicked;
-
-            HexFrame.Add(btton); HexFrame.Add(btton1);
+            hLogic = new();
+            hLogic.CreateHexFrame(HexFrame);
 
             ConsoleFrame = new FrameView()
             {
@@ -115,6 +112,10 @@ namespace fot
                     {
                         RemainingAttempts = 4;
                         UpdateAttemptsLabel();
+                    }),
+                    new MenuItem("_Show CorrectWord", "", () =>
+                    {
+                        MessageBox.Query("CorrectWord", $"The correct word is: {hLogic.CorrectWord}", "OK");
                     })
                 })
             });

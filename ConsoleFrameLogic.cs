@@ -4,7 +4,7 @@ namespace fot
 {
     internal class ConsoleFrameLogic
     {
-        public static bool isCorrectWord()
+        public static bool ShowWrongAnswer()
         {
             if (FalloutTerminal.ConsoleFrame.Subviews.Count > 1) // Content view is default subview
                 FalloutTerminal.ConsoleFrame.Subviews.Clear();
