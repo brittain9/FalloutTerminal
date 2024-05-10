@@ -4,10 +4,9 @@ using Terminal.Gui;
 namespace fot
 {
     public class HexFrameLogic
-    {
-        public static event EventHandler GameEnded; // This lives here because our game runs in this frame
-        public string CorrectWord { get; private set; }
-
+    { 
+        public event EventHandler<string> ButtonClicked;
+        
         private List<string> fourLetterWords = new List<string>()
         {
             "able", "acid", "aged", "also", "area", "army",
@@ -28,7 +27,7 @@ namespace fot
 
             Random random = new Random();
             int randomIndex = random.Next(0, fourLetterWords.Count);
-            CorrectWord = fourLetterWords[randomIndex];
+            GameStatistics.CorrectWord = fourLetterWords[randomIndex];
     }
         public void CreateHexFrame(FrameView frame)
         {
@@ -49,9 +48,16 @@ namespace fot
             fourLetterWords.RemoveAt(0);
             button.Clicked += OnTextButtonClicked;
             FalloutTerminal.HexFrame.Add(button);
-
         }
 
+        public void OnTextButtonClicked(object sender) // this will be added to each button in our HexFrame
+        {
+            CustomButton clickedButton = (CustomButton)sender;
+            string chosenWord = clickedButton.CodeWord;
+            
+            ButtonClicked?.Invoke(this, chosenWord);
+        }
+        
         private string GetNextHexNumber(string existingHex = null)
         {
             // If no existing hex number, generate a new random 4-digit hex
@@ -69,45 +75,6 @@ namespace fot
                 int nextNumber = (existingNumber + 1) & 0xFFFF; // Increment and wrap around to 0x0000 if exceeds 0xFFFF
                 return nextNumber.ToString("X4"); // Convert to 4-digit hex string
             }
-        }
-
-        private bool isCorrectWord(string word) { return word == CorrectWord; }
-
-        public void OnTextButtonClicked(object sender)
-        {
-            CustomButton clickedButton = (CustomButton)sender;
-
-            if (isCorrectWord(clickedButton.CodeWord))
-            {
-                // Show a win message popup
-                var result = MessageBox.Query("Congratulations!", "You guessed the correct word!", "Close");
-
-                if (result == 0)
-                {
-                    // User clicked the "Close" button, exit the application
-                    Application.RequestStop();
-                }
-            }
-            else
-            {
-                FalloutTerminal.RemainingAttempts--;
-                FalloutTerminal.UpdateAttemptsLabel();
-                ConsoleFrameLogic.ShowWrongAnswer();
-                CheckGameEnded();
-            }
-        }
-        
-        public void CheckGameEnded()
-        {
-            if (FalloutTerminal.RemainingAttempts <= 0)
-            {
-                GameEnded_Handler();
-            }
-        }
-        
-        public void GameEnded_Handler()
-        {
-            GameEnded?.Invoke(this, EventArgs.Empty);
         }
     }
 }

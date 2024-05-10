@@ -4,20 +4,18 @@ namespace fot
 {
     public class StartWindow : Window
     {
-        private GameStatistics gameStats;
-        public event EventHandler StartClicked;
-        public event EventHandler EndClicked;
+        public static event EventHandler StartClicked; // making these static we only have to init the handler once
+        public static event EventHandler EndClicked;
 
-        public StartWindow(GameStatistics stats)
+        public StartWindow()
         {
-            gameStats = stats;
             
             ColorScheme = new ColorScheme
             {
                 Normal = Terminal.Gui.Attribute.Make(Color.Green, Color.Black),
             };
             
-            if (gameStats.GamesPlayed > 0)
+            if (GameStatistics.GamesPlayed > 0)
             {
                 var startButton = new CustomButton("Continue")
                 {
