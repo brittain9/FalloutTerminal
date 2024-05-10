@@ -5,6 +5,9 @@ namespace fot
 {
     public class HexFrameLogic
     {
+        public static event EventHandler GameEnded; // This lives here because our game runs in this frame
+        public string CorrectWord { get; private set; }
+
         private List<string> fourLetterWords = new List<string>()
         {
             "able", "acid", "aged", "also", "area", "army",
@@ -18,7 +21,6 @@ namespace fot
         };
 
         private string hexNumberStart;
-        public string CorrectWord { get; private set; }
 
         public HexFrameLogic()
         {
@@ -69,11 +71,7 @@ namespace fot
             }
         }
 
-        private bool isCorrectWord(string word)
-        {
-            if (word == CorrectWord) return true;
-            return false;
-        }
+        private bool isCorrectWord(string word) { return word == CorrectWord; }
 
         public void OnTextButtonClicked(object sender)
         {
@@ -95,7 +93,21 @@ namespace fot
                 FalloutTerminal.RemainingAttempts--;
                 FalloutTerminal.UpdateAttemptsLabel();
                 ConsoleFrameLogic.ShowWrongAnswer();
+                CheckGameEnded();
             }
+        }
+        
+        public void CheckGameEnded()
+        {
+            if (FalloutTerminal.RemainingAttempts <= 0)
+            {
+                GameEnded_Handler();
+            }
+        }
+        
+        public void GameEnded_Handler()
+        {
+            GameEnded?.Invoke(this, EventArgs.Empty);
         }
     }
 }

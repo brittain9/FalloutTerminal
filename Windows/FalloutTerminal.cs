@@ -143,6 +143,7 @@ namespace fot
                 _attemptsLabel.Text = RemainingAttempts + " ATTEMPT(S) LEFT: " + new string('█', RemainingAttempts);
             }
         }
+        
         private void AdjustUIElements()
         {
             Title.X = 0;

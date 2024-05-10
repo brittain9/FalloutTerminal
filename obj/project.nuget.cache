@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "v58cHe2YE34eNhiseEkl238r4uxNabGrHpam3Ju5creAja+rvdR/D8Sk8bjzN6zsq4tIBIfXVj8ff/zguvo36g==",
+  "dgSpecHash": "L47gKkvKT92tEHpMpWGcTTu/La+1YfSw5xwBk2k290V0Ij6SGGpKUC/p+r9MCm8gYi+pO/kKDK9POCUTGb0iHw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alex\\source\\repos\\FalloutTerminal\\FalloutTerminal\\FalloutTerminal.csproj",
+  "projectFilePath": "/Users/alex/RiderProjects/FalloutTerminal/FalloutTerminal.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\alex\\.nuget\\packages\\nstack.core\\1.1.1\\nstack.core.1.1.1.nupkg.sha512",
-    "C:\\Users\\alex\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",
-    "C:\\Users\\alex\\.nuget\\packages\\system.management\\8.0.0\\system.management.8.0.0.nupkg.sha512",
-    "C:\\Users\\alex\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
-    "C:\\Users\\alex\\.nuget\\packages\\terminal.gui\\1.16.0\\terminal.gui.1.16.0.nupkg.sha512"
+    "/Users/alex/.nuget/packages/nstack.core/1.1.1/nstack.core.1.1.1.nupkg.sha512",
+    "/Users/alex/.nuget/packages/system.codedom/8.0.0/system.codedom.8.0.0.nupkg.sha512",
+    "/Users/alex/.nuget/packages/system.management/8.0.0/system.management.8.0.0.nupkg.sha512",
+    "/Users/alex/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
+    "/Users/alex/.nuget/packages/terminal.gui/1.16.0/terminal.gui.1.16.0.nupkg.sha512"
   ],
   "logs": []
 }
