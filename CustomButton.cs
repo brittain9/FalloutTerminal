@@ -4,9 +4,7 @@ using Terminal.Gui;
 
 namespace fot
 {
-    // This is just the Terminal GUI Button, but I stripped the brackets and formatting.
-    // Button Class implementation makes a button with brackets: [ Click me ]
-    // This new class just makes a button with text only: Click me
+    // This is just the Terminal GUI Button (all credit to them), but I stripped the brackets and changed formatting.
 
     public class CustomButton : View
     {

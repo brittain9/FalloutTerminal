@@ -13,15 +13,22 @@ namespace fot
         private HexFrameLogic hLogic;
 
         public static FrameView ConsoleFrame { get; set; } // this frame is for the messages
-        public static int RemainingAttempts { get; set; } = 4;
+        public static int RemainingAttempts { get; set; }
 
         private static Label _attemptsLabel;
 
         private bool isDevMode = false;
         private MenuBar _devBar;
 
-        public FalloutTerminal()
+        private GameStatistics gameStats;
+
+        public FalloutTerminal(GameStatistics stats)
         {
+            gameStats = stats;
+            gameStats.GamesPlayed++;
+
+            RemainingAttempts = 4;
+            
             ColorScheme = new ColorScheme
             {
                 Normal = Terminal.Gui.Attribute.Make(Color.Green, Color.Black),
