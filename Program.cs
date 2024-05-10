@@ -7,35 +7,25 @@ class Program
     {
         Application.Init();
         
-        while (!GameStatistics.IsGameOver) // the game isn't over. Idk where to put this variable right now
+        StartWindow.StartClicked += (sender, e) =>
         {
-            var startWindow = new StartWindow();
+            Application.RequestStop();
+            Application.Run<FalloutTerminal>();
+        };
+        StartWindow.EndClicked += (sender, e) =>
+        {
+            Application.RequestStop();
+            Application.Run<EndGameWindow>();
+        };
 
-            StartWindow.StartClicked += (sender, e) =>
-            {
-                Application.RequestStop();
-                var falloutTerminal = new FalloutTerminal();
-                Application.Run(falloutTerminal);
-            };
-            StartWindow.EndClicked += (sender, e) =>
-            {
-                GameStatistics.IsGameOver = true;
-                Application.RequestStop();
-                Application.Run<EndGameWindow>();
-            };
-
-            FalloutTerminal.GameOver += (object sender, GameOverEventArgs e) =>
-            {
-                Application.RequestStop();
-
-                var startWindow = new StartWindow();
-                Application.Run(startWindow); // ask them to try again
-            };
-
-
-            Application.Run(startWindow);
-        }
-
+        FalloutTerminal.GameOver += (object sender, GameOverEventArgs e) =>
+        {
+            Application.RequestStop();
+            Application.Run<StartWindow>();
+        };
+        
+        Application.Run<StartWindow>();
+        
         Application.Shutdown();
     }
     

@@ -4,12 +4,11 @@ namespace fot
 {
     public class StartWindow : Window
     {
-        public static event EventHandler StartClicked; // making these static we only have to init the handler once
+        public static event EventHandler StartClicked;
         public static event EventHandler EndClicked;
 
         public StartWindow()
         {
-            
             ColorScheme = new ColorScheme
             {
                 Normal = Terminal.Gui.Attribute.Make(Color.Green, Color.Black),
@@ -17,7 +16,7 @@ namespace fot
             
             if (GameStatistics.GamesPlayed > 0)
             {
-                var startButton = new CustomButton("Continue")
+                var startButton = new CustomButton("Play Again")
                 {
                     X = Pos.Center(),
                     Y = Pos.Center()
@@ -36,6 +35,7 @@ namespace fot
             }
             else
             {
+                // eventually id like to do a cool intro like fallout
                 var startButton = new CustomButton("Start")
                 {
                     X = Pos.Center(),

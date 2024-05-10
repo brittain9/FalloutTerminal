@@ -7,6 +7,7 @@ namespace fot
     public class FalloutTerminal : Window
     {
         // TODO: Handle resizing
+        public static event EventHandler<GameOverEventArgs> GameOver;
         public static Label Title { get; set; }
         public static Label EnterPassword { get; set; }
         public static FrameView HexFrame { get; set; } // this frame is where the buttons are
@@ -20,7 +21,6 @@ namespace fot
         private bool isDevMode = false;
         private MenuBar _devBar;
         
-        public static event EventHandler<GameOverEventArgs> GameOver;
 
         public FalloutTerminal()
         {
@@ -71,6 +71,7 @@ namespace fot
                 Width = Dim.Percent(30),
                 Height = Dim.Fill()
             };
+            consoleLogic = new();
 
             _devBar = new MenuBar(new[]
             {
@@ -141,6 +142,7 @@ namespace fot
             {
                 GameStatistics.RemainingAttempts--;
                 UpdateAttemptsLabel();
+                consoleLogic.UpdateConsoleFrame(chosenWord);
                 
                 if (GameStatistics.RemainingAttempts <= 0)
                 {

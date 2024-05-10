@@ -12,6 +12,7 @@ namespace fot
         }
         public void UpdateConsoleFrame(string chosenWord)
         {
+
             AddConsoleOutput(chosenWord);
             ConsoleOutputToFrame();
         }
